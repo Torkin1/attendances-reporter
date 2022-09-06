@@ -1,3 +1,2 @@
 meetings/*
 !meetings/template.csv
-attendances.csv
