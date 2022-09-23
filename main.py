@@ -4,7 +4,6 @@ import csv
 import os
 import argparse
 
-# TODO: convert these params in command line args 
 HOURS_PRIZE = None    # hours earned by a student if an attendance of theirs is considered valid
 DURATION_MIN = None  # minimal duration in seconds for an attendance to be considered valid
 REPORT_NAME = None # name of generated report
