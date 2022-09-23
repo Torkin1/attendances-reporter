@@ -2,11 +2,12 @@
 
 import csv
 import os
+import argparse
 
 # TODO: convert these params in command line args 
-HOURS_PRIZE = 2    # hours earned by a student if an attendance of theirs is considered valid
-DURATION_MIN = 60 * 60  # minimal duration in seconds for an attendance to be considered valid
-REPORT_NAME = "attendances" # name of generated report
+HOURS_PRIZE = None    # hours earned by a student if an attendance of theirs is considered valid
+DURATION_MIN = None  # minimal duration in seconds for an attendance to be considered valid
+REPORT_NAME = None # name of generated report
 
 class Attendance:
 
@@ -20,7 +21,7 @@ class Student:
 
 def readStudents():
     students = []
-    with open("students", "r") as f:
+    with open("students.txt", "r") as f:
         for line in f:
             students.append(line[:-1])
     return students
@@ -88,6 +89,19 @@ def printAttendances(students, attendances, hours):
 
 
 if __name__ == "__main__":
+    
+    # parses arguments from command line
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-d", "--duration", help="minimum duration of an attendance to be considered valid (in minutes). Default is 0", type=int, default=0)
+    parser.add_argument("-p", "--prize", help="hours earned by a student if an attendance of theirs is considered valid. Default is 2", type=int, default=2)
+    parser.add_argument("-o", "--output", help="name of generated report. Default is 'attendances.csv'", type=str, default="attendances")
+    
+    args = parser.parse_args()
+
+    DURATION_MIN = args.duration * 60
+    HOURS_PRIZE = args.prize
+    REPORT_NAME = args.output
     
     # prepares table with student names and their attendances
     students = readStudents()
