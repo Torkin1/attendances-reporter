@@ -13,11 +13,6 @@ class Attendance:
     def __init__(self, conference):
         self.conference=conference
 
-class Student:
-    name=""
-    surname=""
-    attended=[]
-
 def readStudents():
     students = []
     with open("students.txt", "r") as f:
